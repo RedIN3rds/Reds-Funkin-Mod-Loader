@@ -21,6 +21,7 @@ To load a mod
 	1. Unzip mod, making sure it works with this launcher
 	2. Open the folder that contains "data", "images", etc. using the button ".."
 	3. Load the mod and enjoy!
+an example mod is loacated in te release section.
 --------------
 # Credits
 --------------
