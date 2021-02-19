@@ -17,6 +17,7 @@ To make the mod work with this program, you are going to need to do some tricks.
 # Players
 --------------
 To load a mod
+
 	1. Unzip mod, making sure it works with this launcher
 	2. Open the folder that contains "data", "images", etc.
 	3. Copy the location of the mod from this point
