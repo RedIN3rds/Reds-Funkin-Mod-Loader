@@ -25,5 +25,5 @@ an example mod is loacated in te release section.
 --------------
 # Credits
 --------------
-Thanks to Egg#8569 for allowing me to reupload their mod as an example track.
+Thanks to Egg#8569 for allowing me to reupload their mod as an example.
 find their youtube here: https://www.youtube.com/channel/UC_aWeAHGZ-iFoT9GWGV4X9Q
