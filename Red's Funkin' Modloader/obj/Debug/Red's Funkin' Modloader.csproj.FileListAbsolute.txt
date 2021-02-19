@@ -1,0 +1,10 @@
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\bin\Debug\Red's Funkin' Modloader.exe.config
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\bin\Debug\Red's Funkin' Modloader.exe
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\bin\Debug\Red's Funkin' Modloader.pdb
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red's Funkin' Modloader.csprojAssemblyReference.cache
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red_s_Funkin__Modloader.Form1.resources
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red_s_Funkin__Modloader.Properties.Resources.resources
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red's Funkin' Modloader.csproj.GenerateResource.cache
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red's Funkin' Modloader.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red's Funkin' Modloader.exe
+C:\Users\Jacob\source\repos\Reds_Funkin_Modloader\Red's Funkin' Modloader\obj\Debug\Red's Funkin' Modloader.pdb

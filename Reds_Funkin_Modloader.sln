@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red's Funkin' Modloader", "Red's Funkin' Modloader\Red's Funkin' Modloader.csproj", "{459BF79D-2A61-48AD-B860-1F66E4BAE899}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{459BF79D-2A61-48AD-B860-1F66E4BAE899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459BF79D-2A61-48AD-B860-1F66E4BAE899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459BF79D-2A61-48AD-B860-1F66E4BAE899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459BF79D-2A61-48AD-B860-1F66E4BAE899}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35ADDE74-2C94-4AD0-A954-065A2D01EA87}
+	EndGlobalSection
+EndGlobal
