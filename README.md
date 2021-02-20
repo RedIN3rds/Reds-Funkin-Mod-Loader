@@ -5,6 +5,7 @@ So, I made a mod loader for Friday Night Funkin
 --------------
 Unzip the zip folder and drop the files from the in the same folder/directory as Funkin.exe
 I recommend that you create a shortcut of "Red's Funkin' Modloader.exe" to your desktop for easy access.
+
 --------------
 # Mod Makers
 --------------
