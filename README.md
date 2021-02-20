@@ -1,10 +1,10 @@
 # Reds-Funkin-Mod-Loader
-So, I made a mod loader for friday night funkin
+So, I made a mod loader for Friday Night Funkin
 
 # HOW TO INSTALL
 --------------
-Drop these files next to Funkin.exe
-create a shortcut of "Red's Funkin' Modloader.exe" to your desktop for easy access.
+Unzip the zip folder and drop the files from the in the same folder/directory as Funkin.exe
+I recommend that you create a shortcut of "Red's Funkin' Modloader.exe" to your desktop for easy access.
 --------------
 # Mod Makers
 --------------
@@ -21,7 +21,7 @@ To load a mod
 	1. Unzip mod, making sure it works with this launcher
 	2. Open the folder that contains "data", "images", etc. using the button ".."
 	3. Load the mod and enjoy!
-an example mod is loacated in te release section.
+An example mod is loacated in the release section.
 --------------
 # Credits
 --------------
