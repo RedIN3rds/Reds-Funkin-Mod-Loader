@@ -32,8 +32,8 @@ namespace Red_s_Funkin__Modloader
                 using (WebClient client = new WebClient())
                 {
                     client.DownloadFile(new Uri("https://cdn.discordapp.com/attachments/824439385708953602/824439420568600617/prev.jpg"), AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\prev.jpg");
-                    client.DownloadFile(new Uri("https://github.com/RedIN3rds/Reds-Funkin-JSON-Generator/releases/download/Alpha/Debug.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\JsonTool\\tool.zip");
-                    ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\JsonTool\\tool.zip", AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\");
+                    client.DownloadFile(new Uri("https://github.com/RedIN3rds/Reds-Funkin-JSON-Generator/releases/download/Alpha/Debug.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\tool.zip");
+                    ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\tool.zip", AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\");
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\tool.zip");
                 }
             }
