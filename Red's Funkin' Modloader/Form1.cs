@@ -1,169 +1,61 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO.Compression;
+using System.Net;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace Red_s_Funkin__Modloader
 {
     public partial class Form1 : Form
     {
+        public static Form1 instance;
+        public int lastdir;
+        public string[] dirname;
+        public object[] mods;
+        public List<string> alist = new List<string>();
+        public List<string> blist = new List<string>();
         public Form1()
         {
+            if (instance == null) { instance = this; }
             InitializeComponent();
-            textBox1.ReadOnly = true;
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "cache.txt"))
+            this.BackColor = Color.FromArgb(47, 66, 107);
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods"))
             {
-                switch (File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt").Length) //I hope you like lotsa spaghetti
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\");
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup");
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods");
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools");
+                using (WebClient client = new WebClient())
                 {
-                    case 1:
-                        string last_name = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt")[0];
-                        string[] last_name_get = last_name.Split('\\');
-                        button8.Enabled = true;
-                        button7.Enabled = false;
-                        button6.Enabled = false;
-                        button9.Enabled = false;
-                        button10.Enabled = false;
-                        label4.Enabled = false;
-                        button8.Show();
-                        button7.Hide();
-                        button6.Hide();
-                        button9.Hide();
-                        button10.Hide();
-                        label4.Hide();
-                        button8.Text = last_name_get[last_name_get.Length - 1];
-                        break;
-                    case 2:
-                        string[] last_name_1 = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-                        string[] last_name_get_1 = last_name_1[0].Split('\\');
-                        string[] last_name_get_2 = last_name_1[1].Split('\\');
-                        button8.Enabled = true;
-                        button7.Enabled = true;
-                        button6.Enabled = false;
-                        button9.Enabled = false;
-                        button10.Enabled = false;
-                        label4.Enabled = false;
-                        button8.Show();
-                        button7.Show();
-                        button6.Hide();
-                        button9.Hide();
-                        button10.Hide();
-                        label4.Hide();
-                        button8.Text = last_name_get_1[last_name_get_1.Length - 1];
-                        button7.Text = last_name_get_2[last_name_get_2.Length - 1];
-                        break;
-                    case 3:
-                        string[] last_name_2 = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-                        string[] last_name_get_1_1 = last_name_2[0].Split('\\');
-                        string[] last_name_get_2_1 = last_name_2[1].Split('\\');
-                        string[] last_name_get_3_1 = last_name_2[2].Split('\\');
-                        button8.Enabled = true;
-                        button7.Enabled = true;
-                        button6.Enabled = true;
-                        button9.Enabled = false;
-                        button10.Enabled = false;
-                        label4.Enabled = false;
-                        button8.Show();
-                        button7.Show();
-                        button6.Show();
-                        button9.Hide();
-                        button10.Hide();
-                        label4.Hide();
-                        button8.Text = last_name_get_1_1[last_name_get_1_1.Length - 1];
-                        button7.Text = last_name_get_2_1[last_name_get_2_1.Length - 1];
-                        button6.Text = last_name_get_3_1[last_name_get_3_1.Length - 1];
-                        break;
-                    case 4:
-                        string[] last_name_3 = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-                        string[] last_name_get_1_2 = last_name_3[0].Split('\\');
-                        string[] last_name_get_2_2 = last_name_3[1].Split('\\');
-                        string[] last_name_get_3_2 = last_name_3[2].Split('\\');
-                        string[] last_name_get_4_2 = last_name_3[3].Split('\\');
-                        button8.Enabled = true;
-                        button7.Enabled = true;
-                        button6.Enabled = true;
-                        button9.Enabled = true;
-                        button10.Enabled = false;
-                        label4.Enabled = false;
-                        button8.Show();
-                        button7.Show();
-                        button6.Show();
-                        button9.Show();
-                        button10.Hide();
-                        label4.Hide();
-                        button8.Text = last_name_get_1_2[last_name_get_1_2.Length - 1];
-                        button7.Text = last_name_get_2_2[last_name_get_2_2.Length - 1];
-                        button6.Text = last_name_get_3_2[last_name_get_3_2.Length - 1];
-                        button9.Text = last_name_get_4_2[last_name_get_4_2.Length - 1];
-                        break;
-                    case 5:
-                        string[] last_name_4 = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-                        string[] last_name_get_1_3 = last_name_4[0].Split('\\');
-                        string[] last_name_get_2_3 = last_name_4[1].Split('\\');
-                        string[] last_name_get_3_3 = last_name_4[2].Split('\\');
-                        string[] last_name_get_4_3 = last_name_4[3].Split('\\');
-                        string[] last_name_get_5_3 = last_name_4[4].Split('\\');
-                        button8.Enabled = true;
-                        button7.Enabled = true;
-                        button6.Enabled = true;
-                        button9.Enabled = true;
-                        button10.Enabled = true;
-                        label4.Enabled = false;
-                        button8.Show();
-                        button7.Show();
-                        button6.Show();
-                        button9.Show();
-                        button10.Show();
-                        label4.Hide();
-                        button8.Text = last_name_get_1_3[last_name_get_1_3.Length - 1];
-                        button7.Text = last_name_get_2_3[last_name_get_2_3.Length - 1];
-                        button6.Text = last_name_get_3_3[last_name_get_3_3.Length - 1];
-                        button9.Text = last_name_get_4_3[last_name_get_4_3.Length - 1];
-                        button10.Text = last_name_get_5_3[last_name_get_5_3.Length - 1];
-                        break;
-                    default:
-                        button6.Enabled = false;
-                        button7.Enabled = false;
-                        button8.Enabled = false;
-                        button9.Enabled = false;
-                        button10.Enabled = false;
-                        label4.Enabled = false;
-                        button6.Hide();
-                        button7.Hide();
-                        button8.Hide();
-                        button9.Hide();
-                        button10.Hide();
-                        label4.Show();
-                        break;
+                    client.DownloadFile(new Uri("https://cdn.discordapp.com/attachments/824439385708953602/824439420568600617/prev.jpg"), AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\prev.jpg");
+                    client.DownloadFile(new Uri("https://github.com/RedIN3rds/Reds-Funkin-JSON-Generator/releases/download/Alpha/Debug.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\JsonTool\\tool.zip");
+                    ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\JsonTool\\tool.zip", AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\");
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Tools\\tool.zip");
                 }
             }
-            else 
+            foreach (string file in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods")) 
             {
-                button6.Enabled = false;
-                button7.Enabled = false;
-                button8.Enabled = false;
-                button9.Enabled = false;
-                button10.Enabled = false;
-                label4.Enabled = false;
-                button6.Hide();
-                button7.Hide();
-                button8.Hide();
-                button9.Hide();
-                button10.Hide();
-                label4.Show();
+                if (file.Contains(".rml")) { Translate(file); }
             }
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            for (int i = 0; i < Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods").Length; i++)
+            {
+                CheckBox newButton = new CheckBox();
+                newButton.Text = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods")[i].Replace(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods\\", ""); 
+                newButton.Tag = i;
+                newButton.Location = new Point(20, 30 * i + 10);
+                newButton.Click += new EventHandler(toggle);
+                panel1.Controls.Add(newButton);
+            }
+            panel1.AutoScroll = false;
+            panel1.HorizontalScroll.Enabled = false;
+            panel1.HorizontalScroll.Visible = false;
+            panel1.HorizontalScroll.Maximum = 0;
+            panel1.AutoScroll = true;
+            panel2.AutoScroll = true;
         }
         private void linkLabel1_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
         {
@@ -176,23 +68,35 @@ namespace Red_s_Funkin__Modloader
                 MessageBox.Show($"Link was not funkin'... \n Error:{oof}");
             }
         }
-
+        private void Translate(string modDir) 
+        {
+            File.Move(modDir, modDir.Replace(".rml", ".zip"));
+            if (File.Exists(modDir)) 
+            {
+                File.Delete(modDir);
+            }
+            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\mods\\" + modDir.Replace(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods\\", "").Replace(".rml", ".zip").Replace(".zip", ""));
+            ZipFile.ExtractToDirectory(modDir.Replace(".rml", ".zip"), AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\mods\\" + modDir.Replace(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods\\", "").Replace(".rml",".zip").Replace(".zip", ""));
+            if (File.Exists(modDir.Replace(".rml", ".zip")))
+            {
+                File.Delete(modDir.Replace(".rml", ".zip"));
+            }
+        }
         private void Channel()
         {
             linkLabel1.LinkVisited = true;
             System.Diagnostics.Process.Start("https://www.youtube.com/channel/UC4qZmcNf8XzM1MejRJ81v6A");
         }
-        public void onLoad(string test) 
+        private void Install()
         {
-            textBox1.Text = test;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (textBox1.Text.Length > 0)
-            {
+            int totalmods = 0;
+            int modssel = 0;
+            foreach (CheckBox check in panel1.Controls) { if (check.Checked) { modssel++; } }
+            foreach (object id in mods) {
+                totalmods++;
+                string mod_Dir = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\mods")[Int32.Parse(id.ToString())];
                 try
                 {
-                    TextBox mod_Dir = textBox1;
                     string tmp = "";
                     string tmp2 = "";
                     string asset_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\assets";
@@ -204,11 +108,8 @@ namespace Red_s_Funkin__Modloader
                     string[] asset_Data_Sub = { "\\blammed", "\\bopeebo", "\\cocoa", "\\dadbattle", "\\eggnog", "\\fresh", "\\high", "\\milf", "\\monster", "\\philly", "\\pico", "\\ridge", "\\roses", "\\satin-panties", "\\senpai", "\\smash", "\\south", "\\spookeez", "\\thorns", "\\tutorial", "\\winter-horrorland" };
                     string backup_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup";
                     var asset_subdir = Directory.GetDirectories(asset_Dir);
-                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\"))
+                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup\\data"))
                     {
-                        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\");
-                        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Mods");
-                        Directory.CreateDirectory(backup_Dir);
                         Directory.CreateDirectory(backup_Dir + "\\data");
                         Directory.CreateDirectory(backup_Dir + "\\images");
                         Directory.CreateDirectory(backup_Dir + "\\music");
@@ -261,432 +162,311 @@ namespace Red_s_Funkin__Modloader
                             }
                         }
                     }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\music\\"))
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\music\\"))
                     {
                         tmp = "\\" + Path.GetFileName(asset);
                         File.Copy(asset, asset_Music + tmp, true);
                     }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\sounds\\"))
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\sounds\\"))
                     {
                         tmp = "\\" + Path.GetFileName(asset);
                         File.Copy(asset, asset_Sounds + tmp, true);
                     }
 
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\data\\"))
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\data\\"))
                     {
                         tmp = "\\" + Path.GetFileName(asset);
                         File.Copy(asset, asset_Data + tmp, true);
                     }
-                    foreach (string asset in Directory.GetDirectories(mod_Dir.Text + "\\data\\"))
+                    foreach (string asset in Directory.GetDirectories(mod_Dir + "\\data\\"))
                     {
                         foreach (string file in Directory.GetFiles(asset))
                         {
                             tmp = "\\" + Path.GetFileName(file);
                             tmp2 = Path.GetDirectoryName(file);
-                            tmp2 = tmp2.Replace(mod_Dir.Text + "\\data", "");
+                            tmp2 = tmp2.Replace(mod_Dir + "\\data", "");
                             File.Copy(file, asset_Data + tmp2 + tmp, true);
                         }
                     }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\images\\"))
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\images\\"))
                     {
                         tmp = "\\" + Path.GetFileName(asset);
                         File.Copy(asset, asset_Images + tmp, true);
                     }
-                    foreach (string asset in Directory.GetDirectories(mod_Dir.Text + "\\images\\"))
+                    foreach (string asset in Directory.GetDirectories(mod_Dir + "\\images\\"))
                     {
                         foreach (string file in Directory.GetFiles(asset))
                         {
                             tmp = "\\" + Path.GetFileName(file);
                             tmp2 = Path.GetDirectoryName(file);
-                            tmp2 = tmp2.Replace(mod_Dir.Text + "\\images", "");
+                            tmp2 = tmp2.Replace(mod_Dir + "\\images", "");
                             File.Copy(file, asset_Images + tmp2 + tmp, true);
                         }
                     }
-                    MessageBox.Show("Install Finished!");
-                    MessageBox.Show("Opening FnF");
-                    List<string> mods = new List<string>();
-                    if (File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt").Length == 0 || !File.Exists(AppDomain.CurrentDomain.BaseDirectory + "cache.txt"))
-                    {
-                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "cache.txt", mod_Dir.Text);
-                    }
-                    else 
-                    {
-                        foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt")) 
-                        {
-                            mods.Add(line);
-                        }
-                        mods.Add(mod_Dir.Text);
-                        string[] final_mods = mods.ToArray();
-                        if (final_mods.Length > 5) 
-                        {
-                            mods.Clear();
-                            mods.Add(final_mods[1]);
-                            mods.Add(final_mods[2]);
-                            mods.Add(final_mods[3]);
-                            mods.Add(final_mods[4]);
-                            mods.Add(final_mods[5]);
-                            final_mods = mods.ToArray();
-                        }
-                        File.WriteAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt", final_mods);
-                        MessageBox.Show("Deleted 1 of list to make room");
-                    }
-                    System.Diagnostics.Process.Start("Funkin.exe");
-                    System.Windows.Forms.Application.Exit();
                 }
-                catch (Exception) 
+                catch (Exception e)
                 {
-                    MessageBox.Show("Error opening mod. Is this in the correct format?");
+                    MessageBox.Show("Error opening mod." + "\n" + e.Message);
                 }
-                }
-            else
-            {
-                MessageBox.Show("No mod to load...");
             }
+            MessageBox.Show("Installed " + modssel + " of " + totalmods);
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void restore()
         {
             if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\backup"))
             {
-                string mod_Dir = AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\backup";
-                string tmp = "";
-                string tmp2 = "";
-                string asset_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\assets";
-                string asset_Images = asset_Dir + "\\images";
-                string[] asset_Images_Sub = { "\\christmas", "\\limo", "\\pauseAlt", "\\philly", "\\weeb" };
-                string asset_Music = asset_Dir + "\\music";
-                string asset_Sounds = asset_Dir + "\\sounds";
-                string asset_Data = asset_Dir + "\\data";
-                string[] asset_Data_Sub = { "\\blammed", "\\bopeebo", "\\cocoa", "\\dadbattle", "\\eggnog", "\\fresh", "\\high", "\\milf", "\\monster", "\\philly", "\\pico", "\\ridge", "\\roses", "\\satin-panties", "\\senpai", "\\smash", "\\south", "\\spookeez", "\\thorns", "\\tutorial", "\\winter-horrorland" };
-                string backup_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup";
-                var asset_subdir = Directory.GetDirectories(asset_Dir);
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\music\\"))
+                try
                 {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Music + tmp, true);
-                }
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\sounds\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Sounds + tmp, true);
-                }
+                    string mod_Dir = AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\backup";
+                    string tmp = "";
+                    string tmp2 = "";
+                    string asset_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\assets";
+                    string asset_Images = asset_Dir + "\\images";
+                    string[] asset_Images_Sub = { "\\christmas", "\\limo", "\\pauseAlt", "\\philly", "\\weeb" };
+                    string asset_Music = asset_Dir + "\\music";
+                    string asset_Sounds = asset_Dir + "\\sounds";
+                    string asset_Data = asset_Dir + "\\data";
+                    string[] asset_Data_Sub = { "\\blammed", "\\bopeebo", "\\cocoa", "\\dadbattle", "\\eggnog", "\\fresh", "\\high", "\\milf", "\\monster", "\\philly", "\\pico", "\\ridge", "\\roses", "\\satin-panties", "\\senpai", "\\smash", "\\south", "\\spookeez", "\\thorns", "\\tutorial", "\\winter-horrorland" };
+                    string backup_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup";
+                    var asset_subdir = Directory.GetDirectories(asset_Dir);
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\music\\"))
+                    {
+                        tmp = "\\" + Path.GetFileName(asset);
+                        File.Copy(asset, asset_Music + tmp, true);
+                    }
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\sounds\\"))
+                    {
+                        tmp = "\\" + Path.GetFileName(asset);
+                        File.Copy(asset, asset_Sounds + tmp, true);
+                    }
 
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\data\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Data + tmp, true);
-                }
-                foreach (string asset in Directory.GetDirectories(mod_Dir + "\\data\\"))
-                {
-                    foreach (string file in Directory.GetFiles(asset))
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\data\\"))
                     {
-                        tmp = "\\" + Path.GetFileName(file);
-                        tmp2 = Path.GetDirectoryName(file);
-                        tmp2 = tmp2.Replace(mod_Dir + "\\data", "");
-                        File.Copy(file, asset_Data + tmp2 + tmp, true);
+                        tmp = "\\" + Path.GetFileName(asset);
+                        File.Copy(asset, asset_Data + tmp, true);
                     }
-                }
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\images\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Images + tmp, true);
-                }
-                foreach (string asset in Directory.GetDirectories(mod_Dir + "\\images\\"))
-                {
-                    foreach (string file in Directory.GetFiles(asset))
+                    foreach (string asset in Directory.GetDirectories(mod_Dir + "\\data\\"))
                     {
-                        tmp = "\\" + Path.GetFileName(file);
-                        tmp2 = Path.GetDirectoryName(file);
-                        tmp2 = tmp2.Replace(mod_Dir + "\\images", "");
-                        File.Copy(file, asset_Images + tmp2 + tmp, true);
+                        foreach (string file in Directory.GetFiles(asset))
+                        {
+                            tmp = "\\" + Path.GetFileName(file);
+                            tmp2 = Path.GetDirectoryName(file);
+                            tmp2 = tmp2.Replace(mod_Dir + "\\data", "");
+                            File.Copy(file, asset_Data + tmp2 + tmp, true);
+                        }
                     }
+                    foreach (string asset in Directory.GetFiles(mod_Dir + "\\images\\"))
+                    {
+                        tmp = "\\" + Path.GetFileName(asset);
+                        File.Copy(asset, asset_Images + tmp, true);
+                    }
+                    foreach (string asset in Directory.GetDirectories(mod_Dir + "\\images\\"))
+                    {
+                        foreach (string file in Directory.GetFiles(asset))
+                        {
+                            tmp = "\\" + Path.GetFileName(file);
+                            tmp2 = Path.GetDirectoryName(file);
+                            tmp2 = tmp2.Replace(mod_Dir + "\\images", "");
+                            File.Copy(file, asset_Images + tmp2 + tmp, true);
+                        }
+                    }
+                    MessageBox.Show("Restore Finished!");
+                } catch (Exception)
+                {
+                    MessageBox.Show("Directory does not exist. \n Have you opened a mod before?");
                 }
-                MessageBox.Show("Restore Finished!");
-                MessageBox.Show("Opening FnF");
-                System.Diagnostics.Process.Start("Funkin.exe");
-                System.Windows.Forms.Application.Exit();
             }
             else 
             {
-                MessageBox.Show("Directory does not exist. \n Have you opened a mod before?");
+                MessageBox.Show("Directory does not exist.\nHave you opened a mod before?");
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            using (var fbd = new FolderBrowserDialog())
+            refresh();
+        }
+        public void refresh() 
+        {
+            panel1.Controls.Clear();
+            for (int i = 0; i < Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods").Length; i++)
             {
-                DialogResult result = fbd.ShowDialog();
+                CheckBox newButton = new CheckBox();
+                newButton.Text = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods")[i].Replace(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods\\", ""); ;
+                newButton.Tag = i;
+                newButton.Location = new Point(20, 30 * i + 10);
+                newButton.Click += new EventHandler(toggle);
+                panel1.Controls.Add(newButton);
+            }
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Timer timer = new Timer();
+            timer.Interval = (100);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+        }
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    textBox1.Text = fbd.SelectedPath;
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            string[] dir = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods");
+            if (dir.Length != lastdir) 
+            {
+                refresh();
+                lastdir = dir.Length;
+            }
+            foreach (string file in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods"))
+            {
+                if (file.Contains(".rml")) { Translate(file); }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<object> list = new List<object>();
+            foreach (CheckBox check in panel1.Controls) 
+            {
+                if (check.CheckState == CheckState.Checked) {
+                    list.Add(check.Tag);
                 }
             }
+            mods = list.ToArray();
+            Install();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-
+            restore();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\backup"))
+        }
+        public void toggle(object sender, System.EventArgs e)
+        {
+            foreach (CheckBox check in panel1.Controls)
             {
-                string mod_Dir = AppDomain.CurrentDomain.BaseDirectory + "mods\\RM-Mod\\backup";
-                string tmp = "";
-                string tmp2 = "";
-                string asset_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\assets";
-                string asset_Images = asset_Dir + "\\images";
-                string[] asset_Images_Sub = { "\\christmas", "\\limo", "\\pauseAlt", "\\philly", "\\weeb" };
-                string asset_Music = asset_Dir + "\\music";
-                string asset_Sounds = asset_Dir + "\\sounds";
-                string asset_Data = asset_Dir + "\\data";
-                string[] asset_Data_Sub = { "\\blammed", "\\bopeebo", "\\cocoa", "\\dadbattle", "\\eggnog", "\\fresh", "\\high", "\\milf", "\\monster", "\\philly", "\\pico", "\\ridge", "\\roses", "\\satin-panties", "\\senpai", "\\smash", "\\south", "\\spookeez", "\\thorns", "\\tutorial", "\\winter-horrorland" };
-                string backup_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup";
-                var asset_subdir = Directory.GetDirectories(asset_Dir);
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\music\\"))
+                if (check.CheckState == CheckState.Checked)
                 {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Music + tmp, true);
-                }
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\sounds\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Sounds + tmp, true);
-                }
-
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\data\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Data + tmp, true);
-                }
-                foreach (string asset in Directory.GetDirectories(mod_Dir + "\\data\\"))
-                {
-                    foreach (string file in Directory.GetFiles(asset))
+                    if (!alist.Contains(check.Tag.ToString()))
                     {
-                        tmp = "\\" + Path.GetFileName(file);
-                        tmp2 = Path.GetDirectoryName(file);
-                        tmp2 = tmp2.Replace(mod_Dir + "\\data", "");
-                        File.Copy(file, asset_Data + tmp2 + tmp, true);
-                    }
-                }
-                foreach (string asset in Directory.GetFiles(mod_Dir + "\\images\\"))
-                {
-                    tmp = "\\" + Path.GetFileName(asset);
-                    File.Copy(asset, asset_Images + tmp, true);
-                }
-                foreach (string asset in Directory.GetDirectories(mod_Dir + "\\images\\"))
-                {
-                    foreach (string file in Directory.GetFiles(asset))
-                    {
-                        tmp = "\\" + Path.GetFileName(file);
-                        tmp2 = Path.GetDirectoryName(file);
-                        tmp2 = tmp2.Replace(mod_Dir + "\\images", "");
-                        File.Copy(file, asset_Images + tmp2 + tmp, true);
-                    }
-                }
-                MessageBox.Show("Restore Finished!");
-            }
-            else
-            {
-                MessageBox.Show("Directory does not exist. \n Have you opened a mod before?");
-            }
-            if (textBox1.Text.Length > 0)
-            {
-                try
-                {
-                    TextBox mod_Dir = textBox1;
-                    string tmp = "";
-                    string tmp2 = "";
-                    string asset_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\assets";
-                    string asset_Images = asset_Dir + "\\images";
-                    string[] asset_Images_Sub = { "\\christmas", "\\limo", "\\pauseAlt", "\\philly", "\\weeb" };
-                    string asset_Music = asset_Dir + "\\music";
-                    string asset_Sounds = asset_Dir + "\\sounds";
-                    string asset_Data = asset_Dir + "\\data";
-                    string[] asset_Data_Sub = { "\\blammed", "\\bopeebo", "\\cocoa", "\\dadbattle", "\\eggnog", "\\fresh", "\\high", "\\milf", "\\monster", "\\philly", "\\pico", "\\ridge", "\\roses", "\\satin-panties", "\\senpai", "\\smash", "\\south", "\\spookeez", "\\thorns", "\\tutorial", "\\winter-horrorland" };
-                    string backup_Dir = AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\backup";
-                    var asset_subdir = Directory.GetDirectories(asset_Dir);
-                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\"))
-                    {
-                        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\");
-                        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\Mods");
-                        Directory.CreateDirectory(backup_Dir);
-                        Directory.CreateDirectory(backup_Dir + "\\data");
-                        Directory.CreateDirectory(backup_Dir + "\\images");
-                        Directory.CreateDirectory(backup_Dir + "\\music");
-                        Directory.CreateDirectory(backup_Dir + "\\sounds");
-                    }
-                    if (!Directory.Exists(backup_Dir + "\\data\\blammed"))
-                    { //Note: This "Catch-All" may be bugged in future versions
-                        foreach (string dir in asset_Data_Sub)
+                        alist.Add(check.Tag.ToString());
+                        try
                         {
-                            Directory.CreateDirectory(backup_Dir + "\\data" + dir);
-                        }
-                        foreach (string dir in asset_Images_Sub)
-                        {
-                            Directory.CreateDirectory(backup_Dir + "\\images" + dir);
-                        }
-                        foreach (string asset in Directory.GetFiles(asset_Music))
-                        {
-                            tmp = asset.Replace(asset_Music, "");
-                            File.Copy(asset, backup_Dir + "\\music" + tmp, true);
-                        }
-                        foreach (string asset in Directory.GetFiles(asset_Sounds))
-                        {
-                            tmp = asset.Replace(asset_Sounds, "");
-                            File.Copy(asset, backup_Dir + "\\sounds" + tmp, true);
-                        }
-                        foreach (string asset in Directory.GetFiles(asset_Data))
-                        {
-                            tmp = asset.Replace(asset_Data, "");
-                            File.Copy(asset, backup_Dir + "\\data" + tmp, true);
-                        }
-                        foreach (string asset in Directory.GetDirectories(asset_Data))
-                        {
-                            foreach (string file in Directory.GetFiles(asset))
+                            panel2.Controls.Clear();
+                            panel3.Controls.Clear();
+                            Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(File.ReadAllText(Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods")[Int32.Parse(check.Tag.ToString())] + "\\" + "Info.json"));
+                            List<string> jsondata = new List<string>();
+                            jsondata.Add(myDeserializedClass.name);
+                            if (myDeserializedClass.name == "red" + "lolmod") 
                             {
-                                tmp = file.Replace(asset_Data, "");
-                                File.Copy(file, backup_Dir + "\\data" + tmp, true);
+                                panel1.BackColor = Color.FromArgb(255, 0, 0);
+                                panel2.BackColor = Color.FromArgb(255, 0, 0);
+                                panel3.BackColor = Color.FromArgb(255, 0, 0);
+                                panel4.BackColor = Color.FromArgb(133, 0, 0);
+                                Form1.instance.BackColor = Color.FromArgb(56, 0, 0);
+                                button1.BackColor = Color.FromArgb(255, 0, 0);
+                                button2.BackColor = Color.FromArgb(255, 0, 0);
+                                button4.BackColor = Color.FromArgb(255, 0, 0);
                             }
-                        }
-                        foreach (string asset in Directory.GetFiles(asset_Images))
-                        {
-                            tmp = asset.Replace(asset_Images, "");
-                            File.Copy(asset, backup_Dir + "\\images" + tmp, true);
-                        }
-                        foreach (string asset in Directory.GetDirectories(asset_Images))
-                        {
-                            foreach (string file in Directory.GetFiles(asset))
+                            jsondata.Add(myDeserializedClass.description);
+                            jsondata.Add(myDeserializedClass.mod);
+                            jsondata.Add(myDeserializedClass.author);
+                            foreach (string u in myDeserializedClass.tags)
                             {
-                                tmp = file.Replace(asset_Images, "");
-                                File.Copy(file, backup_Dir + "\\images" + tmp, true);
+                                jsondata.Add(u);
                             }
+                            for (int i = 0; i < 4 + myDeserializedClass.tags.ToArray().Length; i++)
+                            {
+                                if (i != 1)
+                                {
+                                    Label newButton = new Label();
+                                    newButton.TextAlign = ContentAlignment.MiddleCenter;
+                                    newButton.Location = new Point(100, 30 * i + 10);
+                                    newButton.Text = jsondata.ToArray()[i];
+                                    newButton.AutoSize = true;
+                                    newButton.Tag = i;
+                                    panel2.Controls.Add(newButton);
+                                }
+                                else
+                                {
+                                    TextBox newButton = new TextBox();
+                                    newButton.Location = new Point(100, 20 * i + 7);
+                                    newButton.Height = 40;
+                                    newButton.Width = 155;
+                                    newButton.ReadOnly = true;
+                                    newButton.Text = jsondata.ToArray()[i];
+                                    newButton.Multiline = true;
+                                    newButton.ScrollBars = ScrollBars.Vertical;
+                                    newButton.Tag = i;
+                                    panel2.Controls.Add(newButton);
+                                }
+                            }
+                            for (int i = 0; i < 4 + myDeserializedClass.tags.ToArray().Length; i++)
+                            {
+                                Label newButton = new Label();
+                                newButton.TextAlign = ContentAlignment.MiddleCenter;
+                                newButton.Location = new Point(0, 30 * i + 5);
+                                switch (i)
+                                {
+                                    case 0:
+                                        newButton.Text = "Name:";
+                                        break;
+                                    case 1:
+                                        newButton.Text = "Description:";
+                                        break;
+                                    case 2:
+                                        newButton.Text = "Mod Type:";
+                                        break;
+                                    case 3:
+                                        newButton.Text = "Author:";
+                                        break;
+                                    default:
+                                        newButton.Text = "Tag:";
+                                        break;
+                                }
+                                newButton.Tag = i;
+                                panel2.Controls.Add(newButton);
+                            }
+                            PictureBox news = new PictureBox();
+                            try
+                            {
+                                news.Image = Image.FromFile(Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\mods")[Int32.Parse(check.Tag.ToString())] + "\\prev.jpg");
+                            }
+                            catch (Exception)
+                            {
+                                news.Image = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "\\mods\\RM-Mod\\prev.jpg");
+                            }
+                            news.Location = new Point(0, 0);
+                            news.Size = new Size(300, 170);
+                            panel3.Controls.Add(news);
                         }
-                    }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\music\\"))
-                    {
-                        tmp = "\\" + Path.GetFileName(asset);
-                        File.Copy(asset, asset_Music + tmp, true);
-                    }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\sounds\\"))
-                    {
-                        tmp = "\\" + Path.GetFileName(asset);
-                        File.Copy(asset, asset_Sounds + tmp, true);
-                    }
-
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\data\\"))
-                    {
-                        tmp = "\\" + Path.GetFileName(asset);
-                        File.Copy(asset, asset_Data + tmp, true);
-                    }
-                    foreach (string asset in Directory.GetDirectories(mod_Dir.Text + "\\data\\"))
-                    {
-                        foreach (string file in Directory.GetFiles(asset))
+                        catch (Exception b)
                         {
-                            tmp = "\\" + Path.GetFileName(file);
-                            tmp2 = Path.GetDirectoryName(file);
-                            tmp2 = tmp2.Replace(mod_Dir.Text + "\\data", "");
-                            File.Copy(file, asset_Data + tmp2 + tmp, true);
+                            MessageBox.Show("Mod is broken. Is it in the right format? \n" + b.Message);
                         }
+                        return;
                     }
-                    foreach (string asset in Directory.GetFiles(mod_Dir.Text + "\\images\\"))
-                    {
-                        tmp = "\\" + Path.GetFileName(asset);
-                        File.Copy(asset, asset_Images + tmp, true);
-                    }
-                    foreach (string asset in Directory.GetDirectories(mod_Dir.Text + "\\images\\"))
-                    {
-                        foreach (string file in Directory.GetFiles(asset))
-                        {
-                            tmp = "\\" + Path.GetFileName(file);
-                            tmp2 = Path.GetDirectoryName(file);
-                            tmp2 = tmp2.Replace(mod_Dir.Text + "\\images", "");
-                            File.Copy(file, asset_Images + tmp2 + tmp, true);
-                        }
-                    }
-                    MessageBox.Show("Install Finished!");
-                    MessageBox.Show("Opening FnF");
-                    List<string> mods = new List<string>();
-                    if (File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt").Length == 0 || !File.Exists(AppDomain.CurrentDomain.BaseDirectory + "cache.txt"))
-                    {
-                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "cache.txt", mod_Dir.Text);
-                    }
-                    else
-                    {
-                        foreach (string line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt"))
-                        {
-                            mods.Add(line);
-                        }
-                        mods.Add(mod_Dir.Text);
-                        string[] final_mods = mods.ToArray();
-                        if (final_mods.Length > 5)
-                        {
-                            mods.Clear();
-                            mods.Add(final_mods[1]);
-                            mods.Add(final_mods[2]);
-                            mods.Add(final_mods[3]);
-                            mods.Add(final_mods[4]);
-                            mods.Add(final_mods[5]);
-                            final_mods = mods.ToArray();
-                        }
-                        File.WriteAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt", final_mods);
-                        MessageBox.Show("Deleted 1 of list to make room");
-                    }
-                    System.Diagnostics.Process.Start("Funkin.exe");
-                    System.Windows.Forms.Application.Exit();
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Error opening mod. Is this in the correct format?");
+                    alist.Remove(check.Tag.ToString());
                 }
             }
-            else
-            {
-                MessageBox.Show("No mod to load...");
-            }
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            string[] who_am_I; // trick question, i will always be 4
-            who_am_I = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-            textBox1.Text = who_am_I[4];
-        }
-
-        private void label4_Click(object sender, EventArgs e)
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            string[] who_am_I; // trick question, i will always be 0
-            who_am_I = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-            textBox1.Text = who_am_I[0];
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            string[] who_am_I; // trick question, i will always be 1
-            who_am_I = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-            textBox1.Text = who_am_I[1];
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string[] who_am_I; // trick question, i will always be 2
-            who_am_I = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-            textBox1.Text = who_am_I[2];
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            string[] who_am_I; // trick question, i will always be 3
-            who_am_I = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "cache.txt");
-            textBox1.Text = who_am_I[3];
-        }
+    }
+    public class Root
+    {
+        public string name { get; set; }
+        public string author { get; set; }
+        public string mod { get; set; }
+        public string description { get; set; }
+        public List<string> tags { get; set; }
     }
 }
 
