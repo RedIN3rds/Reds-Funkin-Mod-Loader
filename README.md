@@ -17,14 +17,11 @@ To make the mod work with this program, you are going to need to do some tricks.
 --------------
 # Players
 --------------
-To load a mod
+To load a mod drag the .rml file to 'FnF -> mods -> RM-Mod -> mods' while the application is open.
 
-	1. Unzip mod, making sure it works with this launcher
-	2. Open the folder that contains "data", "images", etc. using the button ".."
-	3. Load the mod and enjoy!
-An example mod is loacated in the release section.
+An example mod will be loacated in the release section.
 --------------
 # Credits
 --------------
-Thanks to Egg#8569 for allowing me to reupload their mod as an example.
+Thanks to Egg#8569 for allowing me to reupload their mod as an example. (Alpha Release)
 find their youtube here: https://www.youtube.com/channel/UC_aWeAHGZ-iFoT9GWGV4X9Q
