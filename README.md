@@ -13,7 +13,7 @@ To make the mod work with this program, you are going to need to do some tricks.
 
 	1. Get the mod setup where it works.
 	2. (optional) delete the normal FnF files **excluding folders**
-	3. Rename assets to desired name and zip
+	3. Use the included mod packager in mods -> RM-Mod -> Tools
 --------------
 # Players
 --------------
